@@ -18,7 +18,7 @@ const PageList = ({
   data: any
   location: Location
 }) => {
-  const posts = mergePosts(data.allMarkdownRemark, data.allWpPost, data.allFile)
+  const posts = mergePosts(data.allMarkdownRemark, data.allFile)
   const title = `記事一覧`
 
   return (
@@ -90,30 +90,6 @@ export const pageQuery = graphql`
           description
           featuredImagePath
           category
-        }
-      }
-    }
-    allWpPost(limit: $limit, skip: $skip, sort: { date: DESC }) {
-      nodes {
-        title
-        excerpt
-        slug
-        date(formatString: "YYYY/MM/DD")
-        featuredImage {
-          node {
-            altText
-            gatsbyImage(
-              width: 100
-              height: 100
-              formats: [AUTO, WEBP, AVIF]
-              placeholder: BLURRED
-            )
-          }
-        }
-        categories {
-          nodes {
-            name
-          }
         }
       }
     }

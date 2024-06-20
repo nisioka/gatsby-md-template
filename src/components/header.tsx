@@ -33,23 +33,9 @@ const Header = ({ location }: { location: Location }) => {
         <nav className="nav-pc">
           <ul>
             <li>
-              <Link to="/category/information-technology">技術系</Link>
-            </li>
-            <li>
-              <Link to="/category/event-report">イベントレポート</Link>
-            </li>
-            <li>
-              <Link to="/category/life">生活</Link>
-            </li>
-            <li>
               <Link to="/search">
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
                 検索
-              </Link>
-            </li>
-            <li>
-              <Link to="/management/how-about-this-blog">
-                このブログについて
               </Link>
             </li>
           </ul>
@@ -60,23 +46,9 @@ const Header = ({ location }: { location: Location }) => {
         <nav className="nav-mobile">
           <ul>
             <li>
-              <Link to="/category/information-technology">技術系</Link>
-            </li>
-            <li>
-              <Link to="/category/event-report">イベントレポート</Link>
-            </li>
-            <li>
-              <Link to="/category/life">生活</Link>
-            </li>
-            <li>
               <Link to="/search">
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
                 検索
-              </Link>
-            </li>
-            <li>
-              <Link to="/management/how-about-this-blog">
-                このブログについて
               </Link>
             </li>
             <li className="close" onClick={handleClick}>

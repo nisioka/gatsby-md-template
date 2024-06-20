@@ -1,11 +1,11 @@
 {
-  "name": "gatsby-starter-blog",
+  "name": "gatsby-md-template",
   "private": true,
-  "description": "A starter for a blog powered by Gatsby and Markdown",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "A starter for a blog powered by Gatsby and MarkdownJSX",
+  "version": "1.0.0",
+  "author": "https://github.com/nisioka",
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/nisioka/gatsby-md-template/issues"
   },
   "dependencies": {
     "@fontsource-variable/montserrat": "^5.0.19",
@@ -28,7 +28,6 @@
     "gatsby-remark-prismjs": "^7.13.1",
     "gatsby-remark-responsive-iframe": "^6.13.1",
     "gatsby-source-filesystem": "^5.13.1",
-    "gatsby-source-wordpress": "^7.13.4",
     "gatsby-transformer-remark": "^6.13.1",
     "gatsby-transformer-sharp": "^5.13.1",
     "html-react-parser": "^5.1.10",

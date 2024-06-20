@@ -3,11 +3,10 @@ import * as React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 
-const TagCloud = () => {
+const TagCloud = ({title = "タグクラウド"}) => {
   const {
-    allMarkdownRemark,
-    allWpPost,
-  }: { allMarkdownRemark: AllMarkdownRemark; allWpPost: AllWpPost } =
+    allMarkdownRemark
+  }: { allMarkdownRemark: AllMarkdownRemark } =
     useStaticQuery(
       graphql`
         query {
@@ -18,22 +17,12 @@ const TagCloud = () => {
               }
             }
           }
-          allWpPost {
-            nodes {
-              tags {
-                nodes {
-                  name
-                }
-              }
-            }
-          }
         }
       `
     )
 
   const postTags = allMarkdownRemark.nodes
     .map(post => post.frontmatter.tags)
-    .concat(allWpPost.nodes.map(post => post.tags.nodes.map(t => t.name)))
 
   const tagsBase = postTags
     .reduce((tagCount, post) => {
@@ -48,7 +37,7 @@ const TagCloud = () => {
       })
       return tagCount
     }, [] as { name: string; count: number }[])
-    .filter(t => t.count > 1)
+    // .filter(t => t.count > 1)
     .sort((a, b) => b.count - a.count)
 
   const largeBoundary = tagsBase[Math.ceil(tagsBase.length / 3)].count
@@ -57,7 +46,7 @@ const TagCloud = () => {
 
   return (
     <TagCloudList>
-      <h5>タグクラウド</h5>
+      <h5>{title}</h5>
       {tagsView.map(tag => {
         let size
         if (tag.count > largeBoundary) {

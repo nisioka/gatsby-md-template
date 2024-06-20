@@ -2,7 +2,6 @@ import { getImage, IGatsbyImageData } from "gatsby-plugin-image"
 
 export function mergePosts(
   allMarkdownRemark: AllMarkdownRemark,
-  allWpPost: AllWpPost,
   allFile?: AllFile
 ) {
   let allFeaturedImages: { [key: string]: IGatsbyImageData } = {}
@@ -12,7 +11,6 @@ export function mergePosts(
         node.node.childImageSharp.gatsbyImageData
     })
   const mdPosts = allMarkdownRemark.nodes
-  const wpPosts = allWpPost.nodes
   return mdPosts
     .map(post => {
       return {
@@ -33,30 +31,12 @@ export function mergePosts(
         tags: post.frontmatter.tags || [],
       } as CommonPost
     })
-    .concat(
-      wpPosts.map(post => {
-        return {
-          title: post.title,
-          excerpt: removeHtmlTags(post.excerpt),
-          slug: post.slug,
-          date: post.date,
-          dateModified: post.modified,
-          description: post.content,
-          altText: post.featuredImage?.node.altText || "",
-          gatsbyImage:
-            post.featuredImage?.node.gatsbyImage ||
-            getImage(allFeaturedImages["featured/defaultThumbnail.png"]),
-          category: post.categories?.nodes[0]?.name || "",
-          tags: post.tags?.nodes.map(t => t.name) || [],
-        }
-      })
-    )
     .sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     ) as CommonPost[]
 }
 
-export function mergePost(md?: MdPost, wpPost?: WpPost, allFile?: AllFile) {
+export function mergePost(md?: MdPost, allFile?: AllFile) {
   let allFeaturedImages: { [key: string]: IGatsbyImageData } = {}
   allFile &&
     allFile.edges.forEach(node => {
@@ -64,15 +44,14 @@ export function mergePost(md?: MdPost, wpPost?: WpPost, allFile?: AllFile) {
         node.node.childImageSharp.gatsbyImageData
     })
   return {
-    title: md?.frontmatter.title || wpPost?.title,
-    excerpt: removeHtmlTags(md?.excerpt || wpPost?.excerpt),
-    slug: md?.fields.slug || wpPost?.slug,
-    date: md?.frontmatter.date || wpPost?.date,
-    dateModified: md?.frontmatter.dateModified || wpPost?.modified,
-    description: md?.frontmatter.description || wpPost?.content,
+    title: md?.frontmatter.title,
+    excerpt: removeHtmlTags(md?.excerpt),
+    slug: md?.fields.slug,
+    date: md?.frontmatter.date,
+    dateModified: md?.frontmatter.dateModified,
+    description: md?.frontmatter.description,
     altText:
       md?.frontmatter.featuredImagePath ||
-      wpPost?.featuredImage?.node.altText ||
       "",
     gatsbyImage:
       getImage(
@@ -80,18 +59,12 @@ export function mergePost(md?: MdPost, wpPost?: WpPost, allFile?: AllFile) {
           md?.frontmatter.featuredImagePath || "featured/defaultThumbnail.webp"
         ]
       ) ||
-      wpPost?.featuredImage?.node.gatsbyImage ||
       getImage(allFeaturedImages["featured/defaultThumbnail.webp"]),
   } as CommonPost
 }
 
 const categoryNames: { eng: string; jp: string }[] = [
-  { eng: "information-technology", jp: "技術" },
-  { eng: "life", jp: "生活" },
-  { eng: "event-report", jp: "イベントレポート" },
-  { eng: "book-report", jp: "書評" },
-  { eng: "business-efficiency", jp: "業務効率化" },
-  { eng: "glossary", jp: "用語集" },
+  { eng: "one", jp: "1" },
 ]
 
 export function convertCategory(japanese: string) {

@@ -19,10 +19,6 @@ type AllMarkdownRemark = {
   nodes: MdPost[]
 }
 
-type AllWpPost = {
-  nodes: WpPost[]
-}
-
 type AllFile = {
   edges: {
     node: {
@@ -65,31 +61,5 @@ type MdPost = {
     featuredImagePath: string
     category: string
     tags: string[]
-  }
-}
-
-type WpPost = {
-  id: string
-  title: string
-  content: string
-  excerpt: string
-  slug: string
-  date: string
-  modified: string
-  featuredImage: {
-    node: {
-      altText: string
-      gatsbyImage: any
-    }
-  }
-  categories: {
-    nodes: {
-      name: string
-    }[]
-  }
-  tags: {
-    nodes: {
-      name: string
-    }[]
   }
 }

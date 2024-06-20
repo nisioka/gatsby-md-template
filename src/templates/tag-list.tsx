@@ -18,17 +18,8 @@ const CategoryList = ({
   location: Location
 }) => {
   const tagName = pageContext.tag as string
-  const posts = mergePosts(data.allMarkdownRemark, data.allWpPost, data.allFile)
+  const posts = mergePosts(data.allMarkdownRemark, data.allFile)
   const title = `【${tagName}】タグ 一覧`
-
-  if (posts.length === 0) {
-    return (
-      <Layout location={location}>
-        <Seo title={title} location={location} />
-        <p>そのタグの記事はありません。</p>
-      </Layout>
-    )
-  }
 
   return (
     <Layout location={location}>
@@ -110,33 +101,6 @@ export const pageQuery = graphql`
           description
           featuredImagePath
           category
-        }
-      }
-    }
-    allWpPost(
-      sort: { date: DESC }
-      filter: { tags: { nodes: { elemMatch: { name: { eq: $tag } } } } }
-    ) {
-      nodes {
-        title
-        excerpt
-        slug
-        date(formatString: "YYYY/MM/DD")
-        featuredImage {
-          node {
-            altText
-            gatsbyImage(
-              width: 100
-              height: 100
-              formats: [AUTO, WEBP, AVIF]
-              placeholder: BLURRED
-            )
-          }
-        }
-        categories {
-          nodes {
-            name
-          }
         }
       }
     }

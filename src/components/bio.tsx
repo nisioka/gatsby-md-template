@@ -25,7 +25,7 @@ const Bio = () => {
         className="bio-avatar"
         layout="fixed"
         formats={["auto", "webp", "avif"]}
-        src="../../static/24okBlock.webp"
+        src="../../static/favicon.webp"
         width={50}
         height={50}
         alt="Profile picture"
